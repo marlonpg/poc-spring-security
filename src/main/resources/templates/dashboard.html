@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - CSRF Protected</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .balance {
+            font-size: 24px;
+            color: #28a745;
+            margin: 20px 0;
+        }
+        .transfer-form {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .logout-btn {
+            background-color: #dc3545;
+        }
+        .logout-btn:hover {
+            background-color: #c82333;
+        }
+        .message {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .protected-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #28a745;
+            color: white;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .info-box {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            border-radius: 4px;
+        }
+        .link-section {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #e7f3ff;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🏦 Bank Dashboard <span class="protected-badge">✓ CSRF Protected</span></h1>
+        <form th:action="@{/logout}" method="post" style="display: inline;">
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </div>
+    
+    <div class="container">
+        <h2>Account Overview</h2>
+        <div class="balance">
+            Current Balance: $<span th:text="${balance}">0.00</span>
+        </div>
+        
+        <div th:if="${message}" class="message success">
+            ✓ <span th:text="${message}"></span>
+        </div>
+        
+        <div th:if="${error}" class="message error">
+            ✗ <span th:text="${error}"></span>
+        </div>
+        
+        <div class="transfer-form">
+            <h3>💸 Transfer Money</h3>
+            <form th:action="@{/transfer}" method="post">
+                <input type="text" name="toAccount" placeholder="Recipient Account" required>
+                <input type="number" name="amount" placeholder="Amount" step="0.01" min="0.01" required>
+                <button type="submit">Transfer</button>
+            </form>
+        </div>
+        
+        <div class="info-box">
+            <strong>🛡️ CSRF Protection Active:</strong>
+            <p>This form is protected by Spring Security's CSRF token. Thymeleaf automatically includes the token in forms.</p>
+            <p><strong>Try this:</strong> Open browser DevTools → Network tab → Submit a transfer → Check the request payload for <code>_csrf</code> token.</p>
+        </div>
+        
+        <div class="link-section">
+            <h3>⚠️ Compare with Vulnerable Page</h3>
+            <p>See the difference between CSRF-protected and unprotected endpoints:</p>
+            <a href="/vulnerable" style="display: inline-block; padding: 10px 20px; background-color: #ffc107; color: black; text-decoration: none; border-radius: 4px; margin-top: 10px;">
+                View Vulnerable Page →
+            </a>
+        </div>
+    </div>
+</body>
+</html>
