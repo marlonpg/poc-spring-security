@@ -105,7 +105,7 @@
 </head>
 <body>
     <div class="header">
-        <h1>⚠️ Unsafe API Endpoint <span class="vulnerable-badge">✗ NO CSRF Protection</span></h1>
+        <h1>Unsafe API Endpoint <span class="vulnerable-badge">NO CSRF Protection</span></h1>
         <a href="/dashboard">
             <button class="back-btn">← Back to Dashboard</button>
         </a>
@@ -118,8 +118,8 @@
         </div>
         
         <div class="vulnerable-form">
-            <h3>💸 Unsafe Transfer (No CSRF Protection)</h3>
-            <p><strong>⚠️ Warning:</strong> This endpoint (<code>/api/unsafe/transfer</code>) has CSRF protection disabled for demonstration purposes.</p>
+            <h3>Unsafe Transfer (No CSRF Protection)</h3>
+            <p><strong>Warning:</strong> This endpoint (<code>/api/unsafe/transfer</code>) has CSRF protection disabled for demonstration purposes.</p>
             
             <form id="unsafeForm">
                 <input type="text" id="toAccount" name="toAccount" placeholder="Recipient Account" required>
@@ -130,7 +130,7 @@
         </div>
         
         <div class="warning-box">
-            <h3>🚨 Why is this dangerous?</h3>
+            <h3>Why is this dangerous?</h3>
             <p>Without CSRF protection, this endpoint can be exploited by malicious websites. An attacker can trick a logged-in user into making unwanted transfers.</p>
             <ul>
                 <li>No CSRF token validation required</li>
@@ -140,7 +140,7 @@
         </div>
         
         <div class="attack-demo">
-            <h3>🎯 Simulated CSRF Attack Demo</h3>
+            <h3>Simulated CSRF Attack Demo</h3>
             <p>Click the button below to simulate how an attacker might exploit this vulnerability:</p>
             
             <button onclick="simulateAttack()" style="background-color: #dc3545;">
@@ -170,7 +170,7 @@ fetch('/api/unsafe/transfer', {
         </div>
         
         <div style="margin-top: 30px; padding: 15px; background-color: #d4edda; border-radius: 4px;">
-            <h3>✅ Solution: Use CSRF Protection</h3>
+            <h3>Solution: Use CSRF Protection</h3>
             <p>The protected endpoint at <code>/transfer</code> (on the dashboard) requires a valid CSRF token, making it immune to these attacks.</p>
             <p><strong>Best Practice:</strong> Never disable CSRF protection for state-changing operations (POST, PUT, DELETE).</p>
         </div>
@@ -214,7 +214,7 @@ fetch('/api/unsafe/transfer', {
             const resultDiv = document.getElementById('attackResult');
             resultDiv.style.display = 'block';
             resultDiv.className = '';
-            resultDiv.innerHTML = '<p>🎯 Executing simulated attack...</p>';
+            resultDiv.innerHTML = '<p>Executing simulated attack...</p>';
             
             try {
                 // This simulates what a malicious website would do
@@ -231,7 +231,7 @@ fetch('/api/unsafe/transfer', {
                 
                 resultDiv.className = 'attack-success';
                 resultDiv.innerHTML = `
-                    <h4>✓ Attack Successful!</h4>
+                    <h4>Attack Successful!</h4>
                     <p><strong>Result:</strong> ${result}</p>
                     <p><strong>What happened:</strong> Without CSRF protection, the malicious request was processed successfully. In a real attack, this would be triggered from an external malicious website.</p>
                     <p><strong>Why it worked:</strong></p>

@@ -98,7 +98,7 @@
 </head>
 <body>
     <div class="header">
-        <h1>🏦 Bank Dashboard <span class="protected-badge">✓ CSRF Protected</span></h1>
+        <h1>Bank Dashboard <span class="protected-badge">CSRF Protected</span></h1>
         <form th:action="@{/logout}" method="post" style="display: inline;">
             <button type="submit" class="logout-btn">Logout</button>
         </form>
@@ -111,15 +111,15 @@
         </div>
         
         <div th:if="${message}" class="message success">
-            ✓ <span th:text="${message}"></span>
+            <span th:text="${message}"></span>
         </div>
         
         <div th:if="${error}" class="message error">
-            ✗ <span th:text="${error}"></span>
+            <span th:text="${error}"></span>
         </div>
         
         <div class="transfer-form">
-            <h3>💸 Transfer Money</h3>
+            <h3>Transfer Money</h3>
             <form th:action="@{/transfer}" method="post">
                 <input type="text" name="toAccount" placeholder="Recipient Account" required>
                 <input type="number" name="amount" placeholder="Amount" step="0.01" min="0.01" required>
@@ -128,13 +128,13 @@
         </div>
         
         <div class="info-box">
-            <strong>🛡️ CSRF Protection Active:</strong>
+            <strong>CSRF Protection Active:</strong>
             <p>This form is protected by Spring Security's CSRF token. Thymeleaf automatically includes the token in forms.</p>
             <p><strong>Try this:</strong> Open browser DevTools → Network tab → Submit a transfer → Check the request payload for <code>_csrf</code> token.</p>
         </div>
         
         <div class="link-section">
-            <h3>⚠️ Compare with Vulnerable Page</h3>
+            <h3>Compare with Vulnerable Page</h3>
             <p>See the difference between CSRF-protected and unprotected endpoints:</p>
             <a href="/vulnerable" style="display: inline-block; padding: 10px 20px; background-color: #ffc107; color: black; text-decoration: none; border-radius: 4px; margin-top: 10px;">
                 View Vulnerable Page →
